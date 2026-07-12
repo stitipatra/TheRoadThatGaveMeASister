@@ -1,3 +1,11 @@
+window.addEventListener("error", (event) => {
+  console.error("GLOBAL JS ERROR:", event.error || event.message);
+});
+
+window.addEventListener("unhandledrejection", (event) => {
+  console.error("UNHANDLED PROMISE ERROR:", event.reason);
+});
+
 const state = {
   mode: "story",
   currentIndex: -1,
@@ -92,7 +100,7 @@ const car = L.marker(memories[0].coords, {
   keyboard: true,
 }).addTo(map);
 
-car.bindTooltip("Click the car for road memories", {
+car.bindTooltip("Click the car — some memories belonged to the road ❤️", {
   direction: "top",
   offset: [0, -26],
 });
@@ -548,7 +556,6 @@ function closeHomeFinale() {
 }
 
 function openChapterTwo() {
-  homeFinale.classList.add("hidden");
   chapterTwo.classList.remove("hidden");
 
   const scanLabel = document.getElementById("scanLabel");
@@ -559,7 +566,6 @@ function openChapterTwo() {
   chapterReveal.classList.add("hidden");
   scanBar.style.width = "0%";
 
-  // Force the browser to register 0% before animating to 100%.
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       scanBar.style.width = "100%";
@@ -685,22 +691,18 @@ document.querySelectorAll("[data-close-glovebox]").forEach((element) => {
   element.onclick = () => glovebox.classList.remove("open");
 });
 
-document.getElementById("openHomeMemory").onclick = () => {
-  closeHomeFinale();
-
-  const homeIndex = memories.findIndex(
-    (memory) => memory.id === JOURNEY.homeId,
-  );
-
-  openMemory(memories[homeIndex], homeIndex, false);
-};
-
 document.getElementById("openChapterTwo").onclick = () => {
+  homeFinale.classList.add("hidden");
   openChapterTwo();
 };
 
 document.getElementById("closeHomeFinale").onclick = () => {
   homeFinale.classList.add("hidden");
+
+  state.mode = "explore";
+  refreshMarkers();
+
+  map.invalidateSize(true);
 };
 
 document.getElementById("closeChapterTwo").onclick = () => {
@@ -709,9 +711,83 @@ document.getElementById("closeChapterTwo").onclick = () => {
   state.mode = "explore";
   refreshMarkers();
 
+  map.invalidateSize(true);
+
   map.flyTo(JOURNEY.startCenter, JOURNEY.startZoom, {
     duration: 1,
   });
 };
 
 refreshMarkers();
+
+////////////////////////////////
+
+console.log("FINAL BUTTON SETUP REACHED");
+
+const surpriseButton = document.getElementById("openChapterTwo");
+const backToMapButton = document.getElementById("closeHomeFinale");
+const chapterTwoButton = document.getElementById("closeChapterTwo");
+
+console.log({
+  surpriseButton,
+  backToMapButton,
+  chapterTwoButton,
+});
+
+surpriseButton?.addEventListener("click", () => {
+  console.log("ONE LAST SURPRISE CLICKED");
+
+  homeFinale.classList.add("hidden");
+  chapterTwo.classList.remove("hidden");
+
+  const scanLabel = document.getElementById("scanLabel");
+  const scanBar = document.getElementById("scanBar");
+  const chapterReveal = document.getElementById("chapterReveal");
+
+  console.log({
+    scanLabel,
+    scanBar,
+    chapterReveal,
+  });
+
+  scanLabel.textContent = "Scanning the road ahead...";
+  chapterReveal.classList.add("hidden");
+  scanBar.style.width = "0%";
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      scanBar.style.width = "100%";
+    });
+  });
+
+  window.setTimeout(() => {
+    scanLabel.textContent = "Scan complete";
+    chapterReveal.classList.remove("hidden");
+  }, 3000);
+});
+
+backToMapButton?.addEventListener("click", () => {
+  console.log("BACK TO MAP CLICKED");
+
+  homeFinale.classList.add("hidden");
+
+  state.mode = "explore";
+  refreshMarkers();
+
+  map.invalidateSize(true);
+});
+
+chapterTwoButton?.addEventListener("click", () => {
+  console.log("EXPLORE MEMORIES AGAIN CLICKED");
+
+  chapterTwo.classList.add("hidden");
+
+  state.mode = "explore";
+  refreshMarkers();
+
+  map.invalidateSize(true);
+
+  map.flyTo(JOURNEY.startCenter, JOURNEY.startZoom, {
+    duration: 1,
+  });
+});
