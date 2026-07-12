@@ -1,6 +1,6 @@
 const JOURNEY = {
   title: "The Road That Gave Me a Sister",
-  startCenter: [18.5699601010909, 73.91580890479796],
+  startCenter: [18.5885, 73.9135],
   startZoom: 12,
   homeId: "smart-living-pg",
   carMemory: {
@@ -159,7 +159,7 @@ const JOURNEY = {
       order: 11,
       title: "Home",
       place: "Smart Living PG, Viman Nagar",
-      coords: [18.570020709000566, 73.91569973781489],
+      coords: [18.569990198275285, 73.91575338199137],
       icon: "🏠",
       isHome: true,
       story:
