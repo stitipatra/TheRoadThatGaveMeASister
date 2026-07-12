@@ -10,8 +10,8 @@ const state = {
 const memories = [...JOURNEY.memories].sort((a, b) => a.order - b.order);
 const panel = document.getElementById("memoryPanel");
 const glovebox = document.getElementById("gloveboxPanel");
-const chapterTwo = document.getElementById("chapterTwo");
 const homeFinale = document.getElementById("homeFinale");
+const chapterTwo = document.getElementById("chapterTwo");
 const speech = document.getElementById("speechBubble");
 
 const map = L.map("map", { preferCanvas: false }).setView(
@@ -393,17 +393,17 @@ async function travelTo(index) {
   state.visited.add(destination.id);
   refreshMarkers();
 
-  if (destination.isHome) {
-    car.setLatLng(destination.coords);
+  car.setLatLng(destination.coords);
 
+  if (destination.isHome) {
     map.flyTo(destination.coords, 17, {
       duration: 1.2,
     });
 
     await new Promise((resolve) => setTimeout(resolve, 1400));
 
-    openHomeFinale();
-    toast("Pune journey completed — Sister found ❤️");
+    openMemory(destination, index, false);
+    toast("Home reached ❤️");
   } else {
     openMemory(destination, index, false);
     toast(`Memory unlocked: ${destination.title}`);
@@ -483,11 +483,12 @@ function openMemory(memory, index, isCar) {
   document.getElementById("backStopBtn").style.display = isCar ? "none" : "";
   document.getElementById("continueBtn").textContent = isCar
     ? "Back on the road"
-    : index === memories.length - 1
-      ? "There’s still one road..."
+    : memory.isHome
+      ? "Complete our journey ❤️"
       : "Continue the journey";
 
   panel.dataset.car = isCar ? "1" : "0";
+  panel.dataset.home = memory.isHome ? "1" : "0";
   panel.classList.add("open");
 
   selectTab(isCar && memory.videos?.length ? "videos" : "photos");
@@ -527,7 +528,19 @@ function toast(message) {
 }
 
 function openHomeFinale() {
-  homeFinale.classList.remove("hidden");
+  console.log("openHomeFinale called");
+
+  const finale = document.getElementById("homeFinale");
+
+  console.log("homeFinale element:", finale);
+
+  if (!finale) {
+    console.error("homeFinale is missing from index.html");
+    return;
+  }
+
+  finale.classList.remove("hidden");
+  finale.style.display = "grid";
 }
 
 function closeHomeFinale() {
@@ -535,13 +548,28 @@ function closeHomeFinale() {
 }
 
 function openChapterTwo() {
-  closeHomeFinale();
+  homeFinale.classList.add("hidden");
   chapterTwo.classList.remove("hidden");
 
-  const saved = localStorage.getItem("futureDestination");
-  document.getElementById("savedFuturePlace").textContent = saved
-    ? `Next destination saved: ${saved}`
-    : "";
+  const scanLabel = document.getElementById("scanLabel");
+  const scanBar = document.getElementById("scanBar");
+  const chapterReveal = document.getElementById("chapterReveal");
+
+  scanLabel.textContent = "Scanning the road ahead...";
+  chapterReveal.classList.add("hidden");
+  scanBar.style.width = "0%";
+
+  // Force the browser to register 0% before animating to 100%.
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      scanBar.style.width = "100%";
+    });
+  });
+
+  window.setTimeout(() => {
+    scanLabel.textContent = "Scan complete";
+    chapterReveal.classList.remove("hidden");
+  }, 3000);
 }
 
 document.getElementById("startBtn").onclick = () => {
@@ -568,12 +596,16 @@ document.getElementById("continueBtn").onclick = () => {
     return;
   }
 
+  if (panel.dataset.home === "1") {
+    closeMemoryPanel();
+    openHomeFinale();
+    return;
+  }
+
   const nextIndex = state.currentIndex + 1;
 
   if (nextIndex < memories.length) {
     travelTo(nextIndex);
-  } else {
-    openHomeFinale();
   }
 };
 
@@ -663,24 +695,23 @@ document.getElementById("openHomeMemory").onclick = () => {
   openMemory(memories[homeIndex], homeIndex, false);
 };
 
-document.getElementById("openChapterTwo").onclick = openChapterTwo;
-document.getElementById("closeHomeFinale").onclick = closeHomeFinale;
+document.getElementById("openChapterTwo").onclick = () => {
+  openChapterTwo();
+};
 
-document.getElementById("saveFuturePlace").onclick = () => {
-  const value = document.getElementById("futurePlace").value.trim();
-
-  if (value) {
-    localStorage.setItem("futureDestination", value);
-    document.getElementById("savedFuturePlace").textContent =
-      `Next destination saved: ${value}`;
-  }
+document.getElementById("closeHomeFinale").onclick = () => {
+  homeFinale.classList.add("hidden");
 };
 
 document.getElementById("closeChapterTwo").onclick = () => {
   chapterTwo.classList.add("hidden");
+
   state.mode = "explore";
   refreshMarkers();
-  map.flyTo(JOURNEY.startCenter, JOURNEY.startZoom);
+
+  map.flyTo(JOURNEY.startCenter, JOURNEY.startZoom, {
+    duration: 1,
+  });
 };
 
 refreshMarkers();

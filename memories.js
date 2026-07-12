@@ -165,7 +165,7 @@ const JOURNEY = {
       story:
         "Pune was full of places. But this was where the city began feeling like home.",
       quote:
-        "When I came to Pune, I expected experience. I did not expect to leave with a sister.",
+        "When I came to Pune, I expected an experience. I did not expect to leave with a sister.",
       photos: [],
       videos: [],
       voice: [],
