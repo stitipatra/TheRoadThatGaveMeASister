@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Road That Gave Me a Sister</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="intro" class="intro">
+    <div class="intro-card">
+      <p class="eyebrow">A journey through Pune</p>
+      <h1>The Road That Gave Me a Sister</h1>
+      <p>Some roads take you to places. One road gave me family.</p>
+      <button id="startBtn">Start the drive</button>
+    </div>
+  </div>
+
+  <main id="app" class="app hidden">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Pune memory map</p>
+        <h2>The Road That Gave Me a Sister</h2>
+      </div>
+      <div class="top-actions">
+        <button id="storyModeBtn" class="ghost">Story mode</button>
+        <button id="exploreModeBtn" class="ghost">Explore map</button>
+        <button id="homeBtn" class="ghost">Drive home</button>
+        <button id="gloveboxBtn" class="ghost">Glovebox <span id="gloveboxCount">0</span></button>
+        <button id="soundBtn" class="ghost" aria-label="Toggle sound">🔊</button>
+      </div>
+    </header>
+
+    <section class="map-shell">
+      <div id="map"></div>
+
+      <div class="journey-card">
+        <span id="modeLabel">Story mode</span>
+        <strong id="progressText">0 / 0 memories</strong>
+        <div class="progress"><span id="progressBar"></span></div>
+      </div>
+
+      <div id="speechBubble" class="speech-bubble hidden"></div>
+      <button id="randomBtn" class="floating-button">Take me somewhere random</button>
+    </section>
+  </main>
+
+  <div id="memoryPanel" class="memory-panel" aria-hidden="true">
+    <div class="panel-backdrop" data-close-panel></div>
+    <article class="memory-card">
+      <button class="close-button" data-close-panel>×</button>
+      <p id="memoryTag" class="eyebrow"></p>
+      <h2 id="memoryTitle"></h2>
+      <p id="memoryPlace" class="place-name"></p>
+      <p id="memoryStory" class="story"></p>
+      <blockquote id="memoryQuote"></blockquote>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="photos">Photos</button>
+        <button class="tab" data-tab="videos">Videos</button>
+        <button class="tab" data-tab="voice">Hear this</button>
+      </div>
+
+      <div id="photosTab" class="tab-content active"></div>
+      <div id="videosTab" class="tab-content"></div>
+      <div id="voiceTab" class="tab-content"></div>
+
+      <div class="panel-actions">
+        <button id="backStopBtn" class="ghost">Previous stop</button>
+        <button id="continueBtn">Continue the journey</button>
+      </div>
+    </article>
+  </div>
+
+  <div id="gloveboxPanel" class="memory-panel" aria-hidden="true"><div class="panel-backdrop" data-close-glovebox></div><article class="memory-card"><button class="close-button" data-close-glovebox>×</button><p class="eyebrow">Collected along the way</p><h2>The Glovebox</h2><div id="gloveboxGrid" class="glovebox-grid"></div></article></div>
+<div id="chapterTwo" class="chapter-two hidden"><div class="chapter-card"><p class="eyebrow">One road remains</p><h2>Chapter Two</h2><p>Reserved for the memories we haven’t made yet.</p><input id="futurePlace" placeholder="Where should we go next?"><button id="saveFuturePlace">Save destination</button><button id="closeChapterTwo" class="ghost">Back to map</button><p id="savedFuturePlace"></p></div></div>
+<div id="achievement" class="achievement"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="memories.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
