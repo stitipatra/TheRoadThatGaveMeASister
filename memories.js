@@ -15,7 +15,7 @@ const JOURNEY = {
   dialogue: [
     "Are we there yet?",
     "You picked the route.",
-    "Still blaming you.",
+    "Dekh kar chala, tere paas license bhi nahi hai!!",
     "Some roads are worth taking twice.",
     "Good thing we took pictures.",
   ],

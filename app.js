@@ -87,8 +87,8 @@ memories.forEach((memory, index) => {
 const carHTML = `
   <span class="car-click-hint">📸</span>
   <div class="car-people">
-    <img src="assets/photos/me-face.png" alt="Me" onerror="this.style.display='none'">
-    <img src="assets/photos/sister-face.png" alt="My sister" onerror="this.style.display='none'">
+    <img src="assets/faces/me-face.png" alt="Me" onerror="this.style.display='none'">
+    <img src="assets/faces/sister-face.png" alt="My sister" onerror="this.style.display='none'">
   </div>
   <div class="car-body">🚗</div>
 `;
