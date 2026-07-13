@@ -125,8 +125,31 @@ const JOURNEY = {
       voice: [],
     },
     {
-      id: "iskcon",
+      id: "pimlico",
       order: 8,
+
+      title: "An evening well spent",
+
+      place: "Pimlico",
+
+      coords: [18.534512701137196, 73.89804233411992],
+
+      icon: "🍽️",
+
+      story:
+        "Some places become memorable not because of the food, but because of the conversations that stretched long after the plates were empty. Wo cute bande aapke peeche jo tha uski id nahi mili yeh bhi yaad rahega. 😅",
+
+      quote: "A good meal fills the stomach. Great company fills the memory.",
+
+      photos: [],
+
+      videos: [],
+
+      voice: [],
+    },
+    {
+      id: "iskcon",
+      order: 9,
       title: "A quieter memory",
       place: "ISKCON Pune",
       coords: [18.524101896101627, 73.87996371774636],
@@ -140,7 +163,7 @@ const JOURNEY = {
     },
     {
       id: "chaturshringi",
-      order: 9,
+      order: 10,
       title: "A little peace above the city",
       place: "Chaturshringi Temple",
       coords: [18.5389889, 73.8282222],
@@ -153,7 +176,7 @@ const JOURNEY = {
     },
     {
       id: "khadakwasla",
-      order: 10,
+      order: 11,
       title: "The road away from the noise",
       place: "Khadakwasla Dam",
       coords: [18.43737408793662, 73.77173024147595],
@@ -166,7 +189,7 @@ const JOURNEY = {
     },
     {
       id: "ganesh-mandir",
-      order: 11,
+      order: 12,
       title: "The familiar corner",
       place: "Ganesh Mandir near Smart Living PG",
       coords: [18.568010503669644, 73.91837746841104],
@@ -180,7 +203,7 @@ const JOURNEY = {
     },
     {
       id: "smart-living-pg",
-      order: 12,
+      order: 13,
       title: "Home",
       place: "Smart Living PG, Viman Nagar",
       coords: [18.569990198275285, 73.91575338199137],
