@@ -60,8 +60,32 @@ const JOURNEY = {
       voice: [],
     },
     {
-      id: "phoenix",
+      id: "mafia-family",
       order: 4,
+
+      title: "The Birthday Chapter 🎂",
+
+      place: "The Mafia Family Kitchen & Bar",
+
+      coords: [18.562529237811336, 73.92866255315586],
+
+      icon: "🎂",
+
+      story:
+        "Birthdays aren't remembered because of the cake. They're remembered because of the people who were there.",
+
+      quote:
+        "Some celebrations last a few hours. The memories they leave can last forever.",
+
+      photos: [],
+
+      videos: [],
+
+      voice: [],
+    },
+    {
+      id: "phoenix",
+      order: 5,
       title: "Where time and money both disappeared",
       place: "Phoenix Marketcity, Viman Nagar",
       coords: [18.5621, 73.9167],
@@ -75,7 +99,7 @@ const JOURNEY = {
     },
     {
       id: "Sash",
-      order: 5,
+      order: 6,
       title: "Good food, better company",
       place: "Sash Cocktail Bar & Kitchen",
       coords: [18.565479282648212, 73.91369728198859],
@@ -89,7 +113,7 @@ const JOURNEY = {
     },
     {
       id: "spice-factory",
-      order: 6,
+      order: 7,
       title: "The spicy chapter",
       place: "Spice Factory",
       coords: [18.536785348977347, 73.9101530261518],
@@ -102,7 +126,7 @@ const JOURNEY = {
     },
     {
       id: "iskcon",
-      order: 7,
+      order: 8,
       title: "A quieter memory",
       place: "ISKCON Pune",
       coords: [18.524101896101627, 73.87996371774636],
@@ -116,7 +140,7 @@ const JOURNEY = {
     },
     {
       id: "chaturshringi",
-      order: 8,
+      order: 9,
       title: "A little peace above the city",
       place: "Chaturshringi Temple",
       coords: [18.5389889, 73.8282222],
@@ -129,7 +153,7 @@ const JOURNEY = {
     },
     {
       id: "khadakwasla",
-      order: 9,
+      order: 10,
       title: "The road away from the noise",
       place: "Khadakwasla Dam",
       coords: [18.43737408793662, 73.77173024147595],
@@ -142,7 +166,7 @@ const JOURNEY = {
     },
     {
       id: "ganesh-mandir",
-      order: 10,
+      order: 11,
       title: "The familiar corner",
       place: "Ganesh Mandir near Smart Living PG",
       coords: [18.568010503669644, 73.91837746841104],
@@ -156,7 +180,7 @@ const JOURNEY = {
     },
     {
       id: "smart-living-pg",
-      order: 11,
+      order: 12,
       title: "Home",
       place: "Smart Living PG, Viman Nagar",
       coords: [18.569990198275285, 73.91575338199137],
