@@ -418,13 +418,13 @@ async function travelTo(index) {
   }
 }
 
-function renderMedia(items, type) {
+function renderMedia(items, type, place) {
   if (!items?.length) {
     if (type === "photos") {
       return `
         <div class="empty-state">
           <div class="empty-state-icon">📷</div>
-          <strong>No photos here</strong>
+          <strong>No photos from ${place}</strong>
           <p>Maybe we were having too much fun to take any.</p>
         </div>
       `;
@@ -433,7 +433,7 @@ function renderMedia(items, type) {
     return `
       <div class="empty-state">
         <div class="empty-state-icon">🎬</div>
-        <strong>No video this time</strong>
+        <strong>No video from ${place}</strong>
         <p>Some memories deserved our full attention, not our phone cameras.</p>
       </div>
     `;
@@ -446,7 +446,7 @@ function renderMedia(items, type) {
           <figure>
             <img
               src="${item.src}"
-              alt="${item.caption || "Memory photo"}"
+              alt="${item.caption || `Memory from ${place}`}"
               loading="lazy"
             >
             <figcaption>${item.caption || ""}</figcaption>
@@ -475,12 +475,12 @@ function renderMedia(items, type) {
     .join("")}</div>`;
 }
 
-function renderVoices(items) {
+function renderVoices(items, place) {
   if (!items?.length) {
     return `
       <div class="empty-state">
         <div class="empty-state-icon">🎙️</div>
-        <strong>No voice note here</strong>
+        <strong>No voice note for ${place}</strong>
         <p>Some stories are better told in person.</p>
       </div>
     `;
@@ -516,12 +516,19 @@ function openMemory(memory, index, isCar) {
   document.getElementById("photosTab").innerHTML = renderMedia(
     memory.photos,
     "photos",
+    memory.place,
   );
+
   document.getElementById("videosTab").innerHTML = renderMedia(
     memory.videos,
     "videos",
+    memory.place,
   );
-  document.getElementById("voiceTab").innerHTML = renderVoices(memory.voice);
+
+  document.getElementById("voiceTab").innerHTML = renderVoices(
+    memory.voice,
+    memory.place,
+  );
 
   document.getElementById("backStopBtn").style.display = isCar ? "none" : "";
   document.getElementById("continueBtn").textContent = isCar
