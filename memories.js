@@ -191,9 +191,9 @@ const JOURNEY = {
       id: "ganesh-mandir",
       order: 12,
       title: "The familiar corner",
-      place: "Ganesh Mandir near Smart Living PG",
+      place: "Ganesh Mandir lane",
       coords: [18.568010503669644, 73.91837746841104],
-      icon: "🛕",
+      icon: "🛣️",
       story: "Add your story here.",
       quote:
         "Not every landmark is famous. Some matter because they were ours.",
