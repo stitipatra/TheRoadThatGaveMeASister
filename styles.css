@@ -679,3 +679,33 @@ blockquote {
 
   font-weight: 800;
 }
+
+.empty-state {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  padding: 2rem;
+  border: 1px dashed rgba(47, 42, 37, 0.2);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.45);
+  text-align: center;
+}
+
+.empty-state-icon {
+  margin-bottom: 0.65rem;
+  font-size: 2.8rem;
+}
+
+.empty-state strong {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+}
+
+.empty-state p {
+  max-width: 380px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}

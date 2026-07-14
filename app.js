@@ -420,7 +420,23 @@ async function travelTo(index) {
 
 function renderMedia(items, type) {
   if (!items?.length) {
-    return `<div class="empty-state">Add ${type} in memories.js when ready.</div>`;
+    if (type === "photos") {
+      return `
+        <div class="empty-state">
+          <div class="empty-state-icon">📷</div>
+          <strong>No photos here</strong>
+          <p>Maybe we were having too much fun to take any.</p>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="empty-state">
+        <div class="empty-state-icon">🎬</div>
+        <strong>No video this time</strong>
+        <p>Some memories deserved our full attention, not our phone cameras.</p>
+      </div>
+    `;
   }
 
   return `<div class="media-grid">${items
@@ -428,29 +444,46 @@ function renderMedia(items, type) {
       if (type === "photos") {
         return `
           <figure>
-            <img src="${item.src}" alt="${
-              item.caption || "Memory photo"
-            }" loading="lazy">
+            <img
+              src="${item.src}"
+              alt="${item.caption || "Memory photo"}"
+              loading="lazy"
+            >
             <figcaption>${item.caption || ""}</figcaption>
-          </figure>`;
+          </figure>
+        `;
       }
 
       return `
         <figure>
-          <video controls playsinline preload="metadata" poster="${
-            item.poster || ""
-          }">
-            <source src="${item.src}" type="${item.type || "video/mp4"}">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            poster="${item.poster || ""}"
+          >
+            <source
+              src="${item.src}"
+              type="${item.type || "video/mp4"}"
+            >
           </video>
+
           <figcaption>${item.caption || ""}</figcaption>
-        </figure>`;
+        </figure>
+      `;
     })
     .join("")}</div>`;
 }
 
 function renderVoices(items) {
   if (!items?.length) {
-    return '<div class="empty-state">Add voice notes later.</div>';
+    return `
+      <div class="empty-state">
+        <div class="empty-state-icon">🎙️</div>
+        <strong>No voice note here</strong>
+        <p>Some stories are better told in person.</p>
+      </div>
+    `;
   }
 
   return items
@@ -458,11 +491,13 @@ function renderVoices(items) {
       (item) => `
         <div class="voice-card">
           <span>🎙️</span>
-          <div style="width:100%">
+
+          <div style="width: 100%">
             <strong>${item.title || "A note from me"}</strong>
             <audio controls src="${item.src}"></audio>
           </div>
-        </div>`,
+        </div>
+      `,
     )
     .join("");
 }
