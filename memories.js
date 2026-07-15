@@ -16,8 +16,12 @@ const JOURNEY = {
     "Arre chal, chalte hain.",
     "Abbe, left nahi... right le!!",
     "Dekh kar chala, tere paas license bhi nahi hai!!",
-    "Oh please! Maine Moradabad ke highway pe chalai hai. Apne baap ko mat sikha.",
+    "Oh please! Maine Moradabad ke highway pe chalai hai. License hai mere paas.",
     "Stiti! Itna tez nahi... dheere chala scooty!",
+    "Chal chal apne baap ko mat seekha!",
+    "Nooooooooooooooooooooooo",
+    "LEAVEEEE!!!!",
+    "Abbe chal mein hi dungi chai ke paise!!",
   ],
   memories: [
     {
