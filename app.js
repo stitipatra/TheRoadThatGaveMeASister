@@ -597,6 +597,51 @@ function closeHomeFinale() {
   homeFinale.classList.add("hidden");
 }
 
+function showEndingCredits() {
+  const ending = document.getElementById("cinematicEnding");
+  const text = document.getElementById("cinematicText");
+
+  ending.classList.remove("hidden");
+
+  text.innerHTML = `
+        <div class="ending-line">Thank you for making Pune</div>
+        <div class="ending-line">feel like home.</div>
+
+        <div class="ending-heart">❤️</div>
+
+        <div class="ending-line small">For Rupali Didu</div>
+
+        <div class="ending-line signature">— Stiti</div>
+    `;
+
+  requestAnimationFrame(() => {
+    ending.classList.add("show");
+  });
+
+  const returnToMap = () => {
+    ending.classList.remove("show");
+
+    window.setTimeout(() => {
+      ending.classList.add("hidden");
+
+      state.mode = "explore";
+      refreshMarkers();
+
+      map.invalidateSize(true);
+
+      map.flyTo(JOURNEY.startCenter, JOURNEY.startZoom, {
+        duration: 1,
+      });
+    }, 1000);
+  };
+
+  // Return to Explore mode after 15 seconds.
+  window.setTimeout(returnToMap, 15000);
+
+  // Or click the ending screen to return immediately.
+  ending.onclick = returnToMap;
+}
+
 function openChapterTwo() {
   chapterTwo.classList.remove("hidden");
 
@@ -749,6 +794,7 @@ document.getElementById("closeHomeFinale").onclick = () => {
 
 document.getElementById("closeChapterTwo").onclick = () => {
   chapterTwo.classList.add("hidden");
+  setTimeout(showEndingCredits, 500);
 
   state.mode = "explore";
   refreshMarkers();

@@ -709,3 +709,72 @@ blockquote {
   color: var(--muted);
   line-height: 1.55;
 }
+
+.cinematic-ending {
+  position: fixed;
+  inset: 0;
+
+  background: #111;
+
+  color: white;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  z-index: 99999;
+
+  opacity: 0;
+
+  transition: opacity 1.5s;
+}
+
+.cinematic-ending.show {
+  opacity: 1;
+}
+
+.cinematic-text {
+  font-size: 2rem;
+
+  line-height: 2;
+
+  opacity: 0;
+
+  animation: fadeCredits 2s forwards;
+}
+
+.ending-heart {
+  font-size: 3rem;
+
+  margin: 30px 0;
+}
+
+.small {
+  font-size: 1.4rem;
+
+  margin-top: 20px;
+}
+
+.signature {
+  margin-top: 40px;
+
+  opacity: 0.7;
+
+  font-style: italic;
+}
+
+@keyframes fadeCredits {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
