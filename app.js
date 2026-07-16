@@ -503,6 +503,7 @@ function renderVoices(items, place) {
 }
 
 function openMemory(memory, index, isCar) {
+  closeMemoryPanel();
   document.getElementById("memoryTag").textContent = isCar
     ? "Click the car anytime"
     : memory.isHome
@@ -555,7 +556,30 @@ function openCarMemory() {
 
 function closeMemoryPanel() {
   panel.classList.remove("open");
-  document.querySelectorAll("video,audio").forEach((media) => media.pause());
+
+  document
+    .querySelectorAll("#videosTab video, #voiceTab audio")
+    .forEach((media) => {
+      media.pause();
+
+      try {
+        media.currentTime = 0;
+      } catch (error) {
+        // Ignore if metadata was not loaded yet.
+      }
+
+      media.removeAttribute("src");
+
+      media.querySelectorAll("source").forEach((source) => {
+        source.removeAttribute("src");
+      });
+
+      media.load();
+    });
+
+  document.getElementById("photosTab").replaceChildren();
+  document.getElementById("videosTab").replaceChildren();
+  document.getElementById("voiceTab").replaceChildren();
 }
 
 function selectTab(tabName) {
